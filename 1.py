@@ -11,7 +11,7 @@ class Sudoku:
         grid_set = set(self.board[start_row + i][start_col + j] for i in range(3) for j in range(3))
         
         return num not in row_set and num not in col_set and num not in grid_set
-        
+
     def find_empty(self):
         # Encuentra la próxima celda vacía en el tablero.
         return {(i, j) for i in range(9) for j in range(9) if self.board[i][j] == 0}
@@ -35,3 +35,22 @@ class Sudoku:
                 self.board[row][col] = 0  # Revierte si la solución no es válida.
 
         return False
+
+    def display(self):
+        # Muestra el tablero del Sudoku en la consola.
+        for i in range(9):
+            if i % 3 == 0 and i != 0:
+                print("- - - - - - - - - - - - ")
+            for j in range(9):
+                if j % 3 == 0 and j != 0:
+                    print(" | ", end="")
+                if j == 8:
+                    print(self.board[i][j])
+                else:
+                    print(str(self.board[i][j]) + " ", end="")
+
+    def is_solved(self):
+        # Verifica si el Sudoku está completamente resuelto.
+        return all(self.board[i][j] != 0 for i in range(9) for j in range(9))
+    
+        return True
