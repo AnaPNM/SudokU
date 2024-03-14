@@ -57,3 +57,50 @@ class Sudoku:
         return all(self.board[i][j] != 0 for i in range(9) for j in range(9))
     
         return True
+    def _repr_(self):
+        return f"Sudoku({self.board})"
+    
+    def __check_duplicates(self, lst):
+        # Método privado para verificar duplicados en una lista.
+        unique = set()
+        for item in lst:
+            if item != 0:
+                if item in unique:
+                    return False
+                unique.add(item)
+        return True
+
+
+
+
+board = [
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+]
+
+sudoku = Sudoku(board)
+print("Sudoku original:")
+sudoku.display()
+
+while not sudoku.is_solved():
+    row = int(input("Ingrese el número de fila (1-9): ")) - 1
+    col = int(input("Ingrese el número de columna (1-9): ")) - 1
+    num = int(input("Ingrese el número (1-9) para colocar en esa celda: "))
+
+    if not sudoku.is_valid(row, col, num):
+        print("¡Número inválido! Por favor, ingrese otro número.")
+    else:
+        sudoku.board[row][col] = num
+        print("Sudoku actualizado:")
+        sudoku.display()
+        
+
+print("\n¡Felicidades! Has resuelto el Sudoku correctamente:")
+sudoku.display()
