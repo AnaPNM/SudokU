@@ -1,9 +1,6 @@
 class Sudoku:
-    def _init_(self, board=None):
-        if board is None:
-            self.board = [[0] * 9 for _ in range(9)]  # Tablero vacío si no se proporciona ninguno.
-        else:
-            self.board = board  # Inicializa el objeto Sudoku con un tablero dado.
+    def _init_(self, board):
+        self.board = board  # Inicializa el objeto Sudoku con un tablero dado.
 
     def is_valid(self, row, col, num):
         # Verifica si es válido colocar un número en una celda específica según las reglas del Sudoku.
